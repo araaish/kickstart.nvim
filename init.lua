@@ -145,7 +145,11 @@ vim.opt.splitbelow = true
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.listchars = { tab = '  ', trail = '·', nbsp = '␣' }
+
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+vim.opt.expandtab = true
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
@@ -902,7 +906,16 @@ require('lazy').setup({
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       vim.g.gruvbox_material_enable_italic = true
+      vim.g.gruvbox_material_cursor = 'red'
       vim.cmd.colorscheme 'gruvbox-material'
+
+      -- Override cursor highlight colors after theme loads
+      vim.api.nvim_set_hl(0, 'Cursor', { fg = '#282828', bg = '#fabd2f' }) -- Normal mode (yellow)
+      vim.api.nvim_set_hl(0, 'iCursor', { fg = '#282828', bg = '#83a598' }) -- Insert mode (blue)
+      vim.api.nvim_set_hl(0, 'rCursor', { fg = '#282828', bg = '#fb4934' }) -- Replace mode (red)
+
+      -- Change cursor shape in different modes
+      vim.opt.guicursor = 'n-v-c:block-Cursor/lCursor,i:ver25-iCursor,r-cr-o:hor20-rCursor'
     end,
   },
 
